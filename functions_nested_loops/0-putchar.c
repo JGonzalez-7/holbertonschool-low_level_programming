@@ -1,4 +1,5 @@
-#include<stdio.h>
+#include "main.h"
+
 /**
 * main - Entry point printing _putchar in single characters
 * Return: Always 0 (Success)
