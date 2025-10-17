@@ -1,5 +1,4 @@
 #include "main.h"
-#include "_putchar.c"
 
 /**
 * main - Entry point printing _putchar in single characters
