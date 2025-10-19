@@ -11,8 +11,12 @@ int n;
 char letter;
 
 for (n = 1; n <= 10; n++)
-
+{
 for (letter = 'a'; letter <= 'z'; letter++)
+{
 _putchar(letter);
+}
 _putchar('\n');
+}
+
 }
