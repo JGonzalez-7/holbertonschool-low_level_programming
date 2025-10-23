@@ -25,8 +25,7 @@ void print_triangle(int size)
 		{
 			if (space <= size - row)
 				_putchar(' ');
-			else
-				_putchar('#');
+			_putchar('#');
 		}
 		_putchar('\n');
 	}
