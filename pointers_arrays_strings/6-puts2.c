@@ -10,18 +10,18 @@
  */
 void puts2(char *str)
 {
-    int i = 0; /* Counter for string index */
+	int i = 0; /* Counter for string index */
 
-    /* Loop through string until null terminator */
-    while (str[i] != '\0')
-    {
-        /* Print only characters with even index */
-        if (i % 2 == 0)
-        {
-            _putchar(str[i]);
-        }
-        i++;
-    }
+	/* Loop through string until null terminator */
+	while (str[i] != '\0')
+	{
+		/* Print only characters with even index */
+		if (i % 2 == 0)
+		{
+			_putchar(str[i]);
+		}
+		i++;
+	}
 
-    _putchar('\n');
+	_putchar('\n');
 }
