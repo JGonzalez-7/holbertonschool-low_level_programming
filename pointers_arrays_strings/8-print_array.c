@@ -12,18 +12,18 @@
  */
 void print_array(int *a, int n)
 {
-    int element;
+	int element;
 
-    for (element = 0; element < n; element++)
-    {
-        printf("%d", a[element]); /* Print each element */
+	for (element = 0; element < n; element++)
+	{
+		printf("%d", a[element]); /* Print each element */
 
-        /* Add comma and space except after the last number */
-        if (element < n - 1)
-        {
-            printf(", ");
-        }
-    }
+		/* Add comma and space except after the last number */
+		if (element < n - 1)
+		{
+			printf(", ");
+		}
+	}
 
-    printf("\n");
+	printf("\n");
 }
