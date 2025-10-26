@@ -12,14 +12,14 @@
  */
 void print_array(int *a, int n)
 {
-    int index;
+    int element;
 
-    for (index = 0; index < n; index++)
+    for (element = 0; element < n; element++)
     {
-        printf("%d", a[index]); /* Print each element */
+        printf("%d", a[element]); /* Print each element */
 
         /* Add comma and space except after the last number */
-        if (index < n - 1)
+        if (element < n - 1)
         {
             printf(", ");
         }
