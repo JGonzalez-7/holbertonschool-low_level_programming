@@ -4,7 +4,7 @@
  * _strcat - concatenates the src string to the dest string
  * @dest: pointer to the destination string
  * @src: pointer to the source string
- * 
+ *
  * Return: pointer to the resulting string dest
  */
 char *_strcat(char *dest, char *src)
@@ -26,5 +26,5 @@ char *_strcat(char *dest, char *src)
 	/* Add terminating null byte at the end */
 	dest[line1] = '\0';
 
-	return dest; /* return pointer to dest */
+	return (dest); /* return pointer to dest */
 }
