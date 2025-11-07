@@ -1,45 +1,58 @@
 #include "dog.h"
 #include <stdlib.h>
-#include <string.h>
+
+/**
+ * _strdup - duplicates a string without using strcpy
+ * @str: string to duplicate
+ * Return: pointer to new string, or NULL on failure
+ */
+char *_strdup(char *str)
+{
+	char *copy;      /* pointer for duplicated string */
+	int len = 0, i;  /* counters */
+
+	if (!str)        /* if input string is NULL */
+		return (NULL);
+
+	while (str[len])  /* calculate string length */
+		len++;
+
+	copy = malloc(len + 1);  /* allocate memory for copy */
+	if (!copy)               /* check malloc success */
+		return (NULL);
+
+	for (i = 0; i <= len; i++) /* copy each character including '\0' */
+		copy[i] = str[i];
+
+	return (copy); /* return pointer to duplicated string */
+}
 
 /**
  * new_dog - creates a new dog
  * @name: name of the dog
  * @age: age of the dog
  * @owner: owner of the dog
- *
  * Return: pointer to new dog, or NULL if failed
  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *d;        /* pointer to new dog structure */
-	char *new_name;   /* copy of name string */
-	char *new_owner;  /* copy of owner string */
+	dog_t *d; /* pointer for new dog struct */
 
-	d = malloc(sizeof(dog_t));    /* allocate memory for dog structure */
-	if (!d)                       /* check malloc success */
+	d = malloc(sizeof(dog_t)); /* allocate memory for struct */
+	if (!d)                     /* check malloc success */
 		return (NULL);
 
-	new_name = malloc(strlen(name) + 1);  /* allocate memory for name string */
-	if (!new_name)                         /* check malloc success */
+	d->name = _strdup(name);  /* duplicate name */
+	d->owner = _strdup(owner);/* duplicate owner */
+	d->age = age;                        /* set age */
+
+	if ((!d->name && name) || (!d->owner && owner)) /* check duplication */
 	{
-		free(d);       /* free dog structure if failed */
+		free(d->name);  /* free name memory */
+		free(d->owner); /* free owner memory */
+		free(d);        /* free struct memory */
 		return (NULL);
 	}
-	strcpy(new_name, name);   /* copy name into allocated memory */
 
-	new_owner = malloc(strlen(owner) + 1); /* allocate memory for owner string */
-	if (!new_owner)                        /* check malloc success */
-	{
-		free(new_name);  /* free name memory if failed */
-		free(d);         /* free dog structure */
-		return (NULL);
-	}
-	strcpy(new_owner, owner); /* copy owner into allocated memory */
-
-	d->name = new_name;  /* assign name to structure */
-	d->age = age;        /* assign age to structure */
-	d->owner = new_owner; /* assign owner to structure */
-
-	return (d);          /* return pointer to new dog */
+	return (d); /* return pointer to new dog */
 }
