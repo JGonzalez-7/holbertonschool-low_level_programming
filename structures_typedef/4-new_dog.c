@@ -1,57 +1,36 @@
 #include "dog.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 
 /**
- * new_dog - creates a new dog
+ * new_dog - creates a new dog and prints a message
  * @name: name of the dog
  * @age: age of the dog
  * @owner: owner of the dog
  *
- * Return: pointer to the new dog, or NULL on failure
+ * Return: pointer to new dog, or NULL if failed
  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *dog;
-	char *name_copy;
-	char *owner_copy;
-
-	dog = malloc(sizeof(dog_t));  /* allocate memory for struct */
-	if (dog == NULL)
+	dog_t *d = malloc(sizeof(dog_t)); /* allocate memory for dog */
+		if (!d)
 		return (NULL);
 
-	if (name != NULL)
-	{
-		name_copy = malloc(strlen(name) + 1);  /* allocate memory for name */
-		if (name_copy == NULL)
-		{
-			free(dog);  /* free struct if malloc fails */
-			return (NULL);
-		}
-		strcpy(name_copy, name);  /* copy name string */
-	}
-	else
-		name_copy = NULL;
+	d->name = name;    /* just assign pointers, no copying */
+	d->age = age;
+	d->owner = owner;
 
-	if (owner != NULL)
-	{
-		owner_copy = malloc(strlen(owner) + 1);  /* allocate memory for owner */
-		if (owner_copy == NULL)
-		{
-			free(name_copy);  /* free name if malloc fails */
-			free(dog);        /* free struct */
-			return (NULL);
-		}
-		strcpy(owner_copy, owner);  /* copy owner string */
-	}
-	else
-		owner_copy = NULL;
+	/* Print the custom message */
+	printf("My name is %s, and I am %.1f :) - Woof!\n", d->name, d->age);
 
-	dog->name = name_copy;    /* set name in struct */
-	dog->age = age;           /* set age in struct */
-	dog->owner = owner_copy;  /* set owner in struct */
+	return (d);
+}
 
-	return (dog);  /* return pointer to new dog */
+int main(void)
+{
+	dog_t *p = new_dog("Poppy", 3.5, "Alice");
+
+	free(p); /* free memory */
+	return (0);
 }
