@@ -4,8 +4,8 @@
 /**
  * print_all - Prints values according to a format string
  * @format: list of types to print (c, i, f, s)
- */ 
-void print_all(const char * const format, ...)  /* main variadic function */ 
+ */
+void print_all(const char * const format, ...)  /* main variadic function */
 {
 	va_list args;           /* argument list handler */
 	unsigned int i = 0;     /* index for format string */
