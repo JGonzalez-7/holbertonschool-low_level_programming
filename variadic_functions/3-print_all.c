@@ -16,20 +16,23 @@ void print_all(const char * const format, ...)
 
 	va_start(args, format); /* Initialize argument list */
 
-	while (format && format[i])  /* First while loop */
+	while (format && format[i])  /* Loop through format string */
 	{
 		switch (format[i])        /* Check the format character */
 		{
 			case 'c':             /* Char type */
 				printf("%s%c", sep, va_arg(args, int));
+				sep = ", ";      /* Update separator */
 				break;
 
 			case 'i':             /* Integer type */
 				printf("%s%d", sep, va_arg(args, int));
+				sep = ", ";      /* Update separator */
 				break;
 
 			case 'f':             /* Float type */
 				printf("%s%f", sep, (float)va_arg(args, double));
+				sep = ", ";      /* Update separator */
 				break;
 
 			case 's':             /* String type */
@@ -37,13 +40,17 @@ void print_all(const char * const format, ...)
 				if (str == NULL)
 					str = "(nil)";
 				printf("%s%s", sep, str);
+				sep = ", ";      /* Update separator */
 				break;
+
+			default:
+				i++;
+				continue;
 		}
 
-		sep = ", ";              /* Set the separator after first value */
-		i++;                    /* Move to next format character */
+		i++;  /* Move to next format character */
 	}
 
-	va_end(args);              /* Cleanup the argument list */
-	printf("\n");              /* Print final newline */
+	va_end(args);          /* Cleanup the argument list */
+	printf("\n");          /* Print final newline */
 }
