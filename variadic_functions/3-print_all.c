@@ -2,55 +2,52 @@
 #include <stdio.h>
 
 /**
- * print_all - Prints anything depending on format
- * @format: A list of types of arguments
- *
- * Return: Nothing
- */
-void print_all(const char * const format, ...)
+ * print_all - Prints values according to a format string
+ * @format: list of types to print (c, i, f, s)
+ */ 
+void print_all(const char * const format, ...)  /* main variadic function */ 
 {
-	va_list args;          /* Argument list */
-	unsigned int i = 0;    /* Index to loop through format string */
-	char *str;             /* String holder */
-	char *sep = "";        /* Separator printed before each element */
+	va_list args;           /* argument list handler */
+	unsigned int i = 0;     /* index for format string */
+	char *str;              /* temporary string pointer */
+	char *sep = "";         /* separator starts empty */
 
-	va_start(args, format); /* Initialize argument list */
+	va_start(args, format); /* initialize args to first optional arg */
 
-	while (format && format[i])  /* Loop through format string */
+	while (format && format[i])  /* loop over format characters */
 	{
-		switch (format[i])        /* Check the format character */
+		switch (format[i])      /* select action based on char */
 		{
-			case 'c':             /* Char type */
+			case 'c':          /* char: fetch as int, print as char */
 				printf("%s%c", sep, va_arg(args, int));
-				sep = ", ";      /* Update separator */
-				break;
+				sep = ", ";   /* after printing, set separator */
+				break;        /* done with 'c' case */
 
-			case 'i':             /* Integer type */
+			case 'i':          /* integer: fetch and print */
 				printf("%s%d", sep, va_arg(args, int));
-				sep = ", ";      /* Update separator */
-				break;
+				sep = ", ";   /* set separator after print */
+				break;        /* done with 'i' case */
 
-			case 'f':             /* Float type */
+			case 'f':          /* float: fetch as double, print */
 				printf("%s%f", sep, (float)va_arg(args, double));
-				sep = ", ";      /* Update separator */
-				break;
+				sep = ", ";   /* set separator after print */
+				break;        /* done with 'f' case */
 
-			case 's':             /* String type */
-				str = va_arg(args, char *);
-				if (str == NULL)
+			case 's':          /* string: fetch pointer and print */
+				str = va_arg(args, char *); /* get string */
+				if (!str)     /* if NULL, use (nil) */
 					str = "(nil)";
-				printf("%s%s", sep, str);
-				sep = ", ";      /* Update separator */
-				break;
+				printf("%s%s", sep, str); /* print string */
+				sep = ", ";   /* set separator after print */
+				break;        /* done with 's' case */
 
-			default:
-				i++;
-				continue;
+			default:           /* unrecognized format char */
+				i++;          /* skip invalid char */
+				continue;     /* continue without changing sep */
 		}
-
-		i++;  /* Move to next format character */
+		i++;                  /* move to next format character */
 	}
 
-	va_end(args);          /* Cleanup the argument list */
-	printf("\n");          /* Print final newline */
+	va_end(args);             /* clean up the argument list */
+	printf("\n");             /* finish output with a newline */
 }
