@@ -1,26 +1,20 @@
 #include "lists.h"
 
 /**
- * get_dnodeint_at_index - returns the nth node of a dlistint_t list
- * @head: pointer to the first node of the list
- * @index: position of the node to retrieve (starting at 0)
+ * sum_dlistint - returns the sum of all the data (n) in a dlistint_t list
+ * @head: pointer to the head of the list
  *
- * Return: pointer to the nth node, or NULL if index is out of range
+ * Return: the sum of all elements; 0 if list is empty
  */
-dlistint_t *get_dnodeint_at_index(dlistint_t *head, unsigned int index)
+int sum_dlistint(dlistint_t *head)
 {
-	dlistint_t *current = head; /* start at the head of the list */
-	unsigned int i = 0; /* counter for tracking position */
+	int sum = 0;         /* total sum */
 
-	/* loop until we reach the desired index */
-	while (current != NULL)
+	while (head != NULL) /* loop through the list */
 	{
-		if (i == index)     /* if this is the node we want, return it */
-			return (current);
-
-		current = current->next; /* move to the next node */
-		i++;                     /* increment index counter */
+		sum += head->n;  /* add node value */
+		head = head->next; /* move to next node */
 	}
 
-	return (NULL); /* index out of range, return NULL */
+	return (sum);        /* return the result */
 }
